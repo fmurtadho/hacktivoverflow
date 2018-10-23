@@ -6,9 +6,8 @@ const downvoteController = require('../controllers/downvoteController')
 
 router.post('/upvotequestion/:id',middleware.authenticate,upvoteController.createQ)
 router.post('/downvotequestion/:id',middleware.authenticate,downvoteController.createQ)
-// router.delete('/:id',middleware.authenticate,answerController.delete)
 
-// router.get('/',answerController.read)
-// router.get('/:id',answerController.readOne)
+router.post('/upvoteanswer/:id',middleware.authenticate,upvoteController.createA)
+router.post('/downvoteanswer/:id',middleware.authenticate,downvoteController.createA)
 
 module.exports = router;

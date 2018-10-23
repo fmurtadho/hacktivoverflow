@@ -3,7 +3,6 @@ const Question = require('../models/questions')
 
 class Controller {
     static create(req,res){
-        console.log('masuk ke answer controller =====')
         if (!req.body.description || req.body.description.length === 0) {
             res.status(500).json({message: 'Cannot post empty answer'})
         }else{
@@ -12,7 +11,6 @@ class Controller {
                 author : req.userData._id //ini diambil dari hasil cek token di middleware
             })
             .then((result)=>{
-                console.log('masuk ke result')
                 Question.findOneAndUpdate({
                     _id : req.params.id
                 },{
@@ -39,7 +37,17 @@ class Controller {
     }
 
     static read(req,res){
-        
+        Answer.find()
+        .then((result)=>{
+            res.status(201).json({
+                data : result
+            })
+        })
+        .catch((err)=>{
+            res.status(500).json({
+                message : 'read article failed'
+            })
+        })
     }
 
     static readOne(req,res){
