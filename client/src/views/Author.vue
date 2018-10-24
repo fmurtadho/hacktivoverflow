@@ -1,9 +1,13 @@
 <template>
     <div class="container">
+        <div class="text-center">
+            <h3>Author Profile</h3>
+        </div>
+        <br>
         <div class="row">
             <div class="col-md-6 img">
                 <img v-bind:src="profile_avatar"
-                    alt="" class="img-rounded">
+                    alt="" class="img-rounded" style="max-width:100px;">
                 <br>
                 <br>
             </div>
@@ -13,10 +17,10 @@
                     <small><cite title="Source Title">{{profile_email}} <i class="icon-map-marker"></i></cite></small>
                 </blockquote>
                 <p>
-                    age<br>
-                    {{profile.age}} <br>
-                    bio<br>
-                    {{profile.bio}}<textarea type="text" v-model="profile_bio"></textarea> <br>
+                    age :<br>
+                    {{profile_age}} <br>
+                    bio :<br>
+                    <textarea type="text" v-model="profile_bio" readonly="readonly"></textarea> <br>
                 </p>
             </div>
         </div>
@@ -57,6 +61,9 @@ export default {
           console.log(err)
         })
     }
+  },
+  created() {
+    console.log('sudah masuk ke author menu tapi gak muncul')
   },
   mounted () {
     this.getProfile(this.$route.params.authorId)

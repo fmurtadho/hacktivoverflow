@@ -44,9 +44,14 @@ export default {
   data () {
     return {
       input_search: '',
-      all_categories: '',
+      // all_categories: '',
 
       category_result: ''
+    }
+  },
+  computed : {
+    all_categories(){
+      return this.$store.state.allCategories
     }
   },
   components : {
@@ -68,21 +73,21 @@ export default {
           console.log(err)
         })
     },
-    getCategories () {
-      let self = this
+    // getCategories () {
+    //   let self = this
 
-      axios({
-        method: 'GET',
-        url: `${config.port}/categories/`
-      })
-        .then((response) => {
-          self.all_categories = response.data
-          console.log(response)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
-    },
+    //   axios({
+    //     method: 'GET',
+    //     url: `${config.port}/categories/`
+    //   })
+    //     .then((response) => {
+    //       self.all_categories = response.data
+    //       console.log(response)
+    //     })
+    //     .catch((err) => {
+    //       console.log(err)
+    //     })
+    // },
     getByCategory (id) {
       let self = this
 
@@ -90,18 +95,20 @@ export default {
         method: 'GET',
         url: `${config.port}/questions/bycategory/${id}`
       })
-        .then((response) => {
-          console.log(response.data.data)
-
-          self.$emit('category-result', response.data.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      .then((response) => {
+        console.log(response.data.data)
+        self.$emit('category-result', response.data.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    },
+    listAllCategories(){
+      this.$store.dispatch('getAllCategories')
     }
   },
   created () {
-    this.getCategories()
+    this.listAllCategories()
   }
 }
 </script>

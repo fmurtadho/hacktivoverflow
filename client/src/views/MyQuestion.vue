@@ -22,7 +22,7 @@
 import config from '@/config.js'
 
 export default {
-  name: 'myarticle',
+  name: 'myquestion',
   props: ['islogin'],
   data () {
     return {

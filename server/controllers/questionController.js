@@ -134,6 +134,7 @@ class Controller {
         Question.find({
                 category: req.params.id
             })
+            .populate('author')
             .then((result) => {
                 res.status(201).json({
                     data: result

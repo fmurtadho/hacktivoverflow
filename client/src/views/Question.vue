@@ -12,7 +12,7 @@
           <!-- Author -->
           <p class="lead">
             by
-            <a href="#">{{question.data.author.name}}</a>
+            <router-link :to="`/authorprofile/${question.data.author._id}`">{{question.data.author.name}}</router-link>
           </p>
           <p v-html="'Posted on ' + question.data.createdAt.slice(0, 10)"></p>
 
@@ -78,7 +78,7 @@ import config from '@/config.js'
 import Sidebar from '@/components/Sidebar.vue'
 
 export default {
-  name: 'completearticle',
+  name: 'completequestion',
   components: {
     Sidebar
   },

@@ -11,25 +11,17 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: Home,
-      children: [
-        {
-          path: '/author/:authorId',
-          name: 'authorprofile',
-          props: true,
-          component: () => import(/* webpackChunkName: "about" */ './views/Author.vue')
-        }
-      ]
+      component: Home
     },
     {
-      path: '/article/:articleId',
-      name: 'completearticle',
-      component: () => import(/* webpackChunkName: "about" */ './views/Article.vue')
+      path: '/question/:articleId',
+      name: 'completequestion',
+      component: () => import(/* webpackChunkName: "about" */ './views/Question.vue')
     },
     {
       path: '/edit/:articleId',
-      name: 'editarticle',
-      component: () => import(/* webpackChunkName: "about" */ './views/EditArticle.vue')
+      name: 'editquestion',
+      component: () => import(/* webpackChunkName: "about" */ './views/EditQuestion.vue')
     },
     {
       path: '/about',
@@ -48,12 +40,12 @@ export default new Router({
       component: () => import(/* webpackChunkName: "about" */ './views/MyProfile.vue')
     },
     {
-      path: '/myarticle',
-      name: 'myarticle',
+      path: '/myquestion',
+      name: 'myquestion',
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/MyArticle.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/MyQuestion.vue')
     },
     {
       path: '/create',
@@ -61,7 +53,12 @@ export default new Router({
       // route level code-splitting
       // this generates a separate chunk (about.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/CreateArticle.vue')
+      component: () => import(/* webpackChunkName: "about" */ './views/CreateQuestion.vue')
+    },
+    {
+      path: '/authorprofile/:authorId',
+      name: 'authorprofile',
+      component: () => import(/* webpackChunkName: "about" */ './views/Author.vue')
     }
   ]
 })

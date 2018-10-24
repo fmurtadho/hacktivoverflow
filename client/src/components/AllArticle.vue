@@ -1,17 +1,17 @@
 <template>
     <!-- Blog Post -->
     <div>
-        <div class="card mb-4" v-for="(question, index) in allQuestion.data" :key="index">
+        <div class="card mb-4" v-for="(question, index) in allQuestions.data" :key="index">
             <div class="card-body">
                 <h2 class="card-title">{{question.title}}</h2>
                 <!-- <p class="card-text" v-html="article.content.slice(0, 150) + ' ...'"></p> -->
-                <router-link :to="`/article/${question._id}`" class="btn btn-primary">Read More &rarr;</router-link>
+                <router-link :to="`/question/${question._id}`" class="btn btn-primary">Read More &rarr;</router-link>
             </div>
             <div class="card-footer text-muted">
                 <div v-html="'Posted on ' + question.createdAt.slice(0, 10)"></div>
                 by
                 <!-- <router-link :to="`/author/${question.author._id}`" >{{question.author.name}}</router-link> -->
-                <router-link :to="{name : 'authorprofile', params : {authorId : question.author._id} }" >{{question.author.name}}</router-link>
+                <router-link :to="`/authorprofile/${question.author._id}`" >{{question.author.name}}</router-link>
                 <div class="text-right"><i class="far fa-comments"></i> {{question.answers.length}}</div>
             </div>
         </div>
@@ -26,38 +26,48 @@ export default {
   props: ['searchresult', 'categoryresult'],
   data () {
     return {
-      allQuestion: ''
+      // allQuestion: ''
+    }
+  },
+  computed : {
+    allQuestions () {
+      return this.$store.state.allQuestions
     }
   },
   methods: {
-    getAllQuestion () {
-
-      let self = this
-
-      axios({
-        method: 'GET',
-        url: `${config.port}/questions`
-      })
-        .then((response) => {
-          self.allQuestion = response.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+    listAllQuestions(){
+      this.$store.dispatch('getAllQuestions')
     }
+    // getAllQuestion () {
+
+    //   let self = this
+
+    //   axios({
+    //     method: 'GET',
+    //     url: `${config.port}/questions`
+    //   })
+    //   .then((response) => {
+    //     self.allQuestion = response.data
+    //   })
+    //   .catch((err) => {
+    //     console.log(err)
+    //   })
+    // }
   },
   created () {
-    this.getAllQuestion()
+    this.listAllQuestions()
   },
   mounted () {
-    this.getAllQuestion()
+
   },
   watch: {
     searchresult: function (val) {
-      this.allQuestion.data = this.searchresult
+      // this.allQuestion.data = this.searchresult
+      this.$store.commit('searchQuestion',this.searchresult)
     },
     categoryresult: function (val) {
-      this.allQuestion.data = this.categoryresult
+      // this.allQuestion.data = this.categoryresult
+      this.$store.commit('searchByCategory',this.categoryresult)
     }
   }
 }

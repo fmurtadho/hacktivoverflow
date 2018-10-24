@@ -23,7 +23,7 @@
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <router-link :to="`/myprofile`" class="dropdown-item" href="">My Profile</router-link>
-                    <router-link :to="`/myarticle`" class="dropdown-item" href="">My Question</router-link>
+                    <router-link :to="`/myquestion`" class="dropdown-item" href="">My Question</router-link>
                     <router-link :to="`/create`" class="dropdown-item" href="">Post Question</router-link>
                 </div>
                 </div>
@@ -40,6 +40,16 @@
             </div>
         </div>
         </nav>
+
+        <div class="alert alert-success" v-if="success === true" role="alert">
+            Registration Success! You can now login with your email and password
+        </div>
+        <div class="alert alert-danger" v-if="failed === true" role="alert">
+            Registration Failed :(
+        </div>
+        <div class="alert alert-danger" v-if="login_failed === true" role="alert">
+            Login Failed :( ... please recheck your email and password
+        </div>
 
         <!-- Modal -->
         <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -85,14 +95,10 @@
                     Password<br>
                     <input type="password" v-model="register_password">
                     <p v-if="register_password_failed === true">*password minimum length is 4</p>
-
-                    <div v-if="register_success === true">
-                      Register Success ! You can now login with your email and password..
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" @click="register()">Register</button>
+                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="register()">Register</button>
                 </div>
                 </div>
             </div>
@@ -123,7 +129,10 @@ export default {
       register_email_failed : false,
       register_password_failed : false,
       
-      register_success : false
+      success : false,
+      failed : false,
+
+      login_failed : false,
     }
   },
   mounted () {
@@ -142,19 +151,6 @@ export default {
       }
     },
     register () {
-      if(this.register_name.length < 4){
-        this.register_name_failed = true
-      }else 
-      
-      if(this.register_email.length < 4){
-        this.register_email_failed = true
-      }
-      
-      if(this.register_password < 4){
-        this.register_password_failed = true
-      }
-
-
       let self = this
 
       let data = {
@@ -169,14 +165,20 @@ export default {
         data
       })
       .then((response) => {
-        console.log(response.data)
+        self.success = true
+        // console.log(response.data)
       })
       .catch((err) => {
+        self.failed = true
         console.log(err)
       })
     
     },
     signin () {
+      this.success = false
+      this.failed = false
+      this.login_failed = false
+
       let email = this.login_email
       let password = this.login_password
 
@@ -193,6 +195,8 @@ export default {
         data
       })
         .then(function (response) {
+          self.login_failed = false
+
           self.login_email = ''
           self.login_password = ''
 
@@ -213,7 +217,7 @@ export default {
           // console.log(this.isadmin)
         })
         .catch(function (err) {
-          self.failedLogin = true
+          self.login_failed = true
           console.log(err)
         })
     },
