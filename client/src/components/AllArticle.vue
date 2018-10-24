@@ -12,6 +12,7 @@
                 by
                 <!-- <router-link :to="`/author/${question.author._id}`" >{{question.author.name}}</router-link> -->
                 <router-link :to="{name : 'authorprofile', params : {authorId : question.author._id} }" >{{question.author.name}}</router-link>
+                <div class="text-right"><i class="far fa-comments"></i> {{question.answers.length}}</div>
             </div>
         </div>
     </div>

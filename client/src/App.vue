@@ -7,7 +7,7 @@
   </div>
 </template>
 <style>
-/* @import "~vue-wysiwyg/dist/vueWysiwyg.css"; */
+@import "~vue-wysiwyg/dist/vueWysiwyg.css";
 </style>
 
 <script>

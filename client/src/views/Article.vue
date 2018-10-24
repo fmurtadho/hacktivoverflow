@@ -24,15 +24,17 @@
           <!-- Post Content -->
           <p class="lead">{{question.data.description}}</p>
           <br>
-          <button class="btn btn-success" @click="upvoteQ(question.data._id)"><i class="fas fa-thumbs-up"></i> {{question.data.upvotes.length}}</button>
-          <button class ="btn btn-danger ml-2" @click="downvoteQ(question.data._id)"><i class="fas fa-thumbs-down"></i> {{question.data.downvotes.length}}</button>
+          <div class="text-right">
+            <button class="btn btn-success" @click="upvoteQ(question.data._id)"><i class="fas fa-thumbs-up"></i> {{question.data.upvotes.length}}</button>
+            <button class ="btn btn-danger ml-2 mr-3" @click="downvoteQ(question.data._id)"><i class="fas fa-thumbs-down"></i> {{question.data.downvotes.length}}</button>
+          </div>
           <!-- <div v-html="article.data.content"></div> -->
           <hr>
 
           <!-- Comments Form -->
           <div class="card my-4" v-if="islogin === true">
             <h5 class="card-header">Post Answer:</h5>
-            <div class="card-body">
+            <div class="card-body text-right">
                 <div class="form-group">
                   <textarea class="form-control" rows="3" v-model="inputanswer"></textarea>
                 </div>
@@ -48,7 +50,7 @@
               <!-- <h5 class="mt-0"></h5> -->
               {{answer.description}}
               <br>
-              <div class="mt-5">
+              <div class="text-right mt-5 ml-3">
                 <button class="btn-sm btn-danger" @click="deleteAnswer(answer._id)" v-if="currentuser === answer.author._id && islogin === true"><i class="fas fa-trash-alt"></i></button>
                 <button class="btn-sm btn-success ml-2" @click="upvoteA(answer._id)"><i class="fas fa-thumbs-up"></i> {{answer.upvotes.length}}</button>
                 <button class ="btn-sm btn-danger ml-2" @click="downvoteA(answer._id)"><i class="fas fa-thumbs-down"></i> {{answer.downvotes.length}}</button>

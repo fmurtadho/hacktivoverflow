@@ -7,15 +7,15 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
-          <h1 class="my-4">
-            <center><small>Question List</small></center>
+          <h1 class="card my-4">
+            <small class="card-header text-justify">Question List</small>
           </h1>
 
           <!-- Blog Post -->
           <all-article :searchresult="searchresult" :categoryresult="categoryresult"></all-article>
 
           <!-- Pagination -->
-          <pagination></pagination>
+          <!-- <pagination></pagination> -->
 
         </div>
 

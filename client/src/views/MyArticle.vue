@@ -1,17 +1,17 @@
 <template>
     <!-- Blog Post -->
     <div>
-        <div class="card mb-4" v-for="(article, index) in myarticle" :key="index">
+        <div class="card mb-4" v-for="(question, index) in myquestion" :key="index">
             <!-- <img class="card-img-top" v-bind:src="article.picture" alt="Card image cap"> -->
             <div class="card-body">
-                <h2 class="card-title">{{article.title}}</h2>
-                <p class="card-text" v-html="article.content.slice(0, 150) + ' ...'"></p>
-                <router-link :to="`/article/${article._id}`" class="btn btn-primary ml-2">Read </router-link>
-                <router-link :to="`/edit/${article._id}`" class="btn btn-success ml-2">Edit </router-link>
-                <button @click="deleteArticle(article._id)" class="btn btn-danger ml-2">Delete </button>
+                <h2 class="card-title">{{question.title}}</h2>
+                <!-- <p class="card-text" v-html="article.content.slice(0, 150) + ' ...'"></p> -->
+                <router-link :to="`/article/${question._id}`" class="btn btn-primary">Read </router-link>
+                <router-link :to="`/edit/${question._id}`" class="btn btn-success ml-2">Edit </router-link>
+                <button @click="deleteArticle(question._id)" class="btn btn-danger ml-2">Delete </button>
             </div>
             <div class="card-footer text-muted">
-                <div v-html="'Posted on ' + article.createdAt.slice(0, 10)"></div>
+                <div v-html="'Posted on ' + question.createdAt.slice(0, 10)"></div>
                 <!-- by
                 <a href="#">{{article.author.name}}</a> -->
             </div>
@@ -27,23 +27,25 @@ export default {
   props: ['islogin'],
   data () {
     return {
-      myarticle: '',
+      myquestion: '',
       triggerChange: ''
     }
   },
   methods: {
-    getMyArticle () {
+    getMyQuestion () {
+
       let self = this
 
       axios({
         method: 'GET',
-        url: `${config.port}/articles/my`,
+        url: `${config.port}/questions/my`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
         .then((response) => {
-          self.myarticle = response.data.data
+          console.log(response.data.data)
+          self.myquestion = response.data.data
         })
         .catch((err) => {
           console.log(err)
@@ -76,10 +78,10 @@ export default {
     }
   },
   created () {
-
+    this.getMyQuestion()
   },
   mounted () {
-    this.getMyArticle()
+    this.getMyQuestion()
     this.checkToken()
   },
   watch: {
