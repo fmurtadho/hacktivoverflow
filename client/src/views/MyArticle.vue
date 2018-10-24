@@ -5,7 +5,6 @@
             <!-- <img class="card-img-top" v-bind:src="article.picture" alt="Card image cap"> -->
             <div class="card-body">
                 <h2 class="card-title">{{question.title}}</h2>
-                <!-- <p class="card-text" v-html="article.content.slice(0, 150) + ' ...'"></p> -->
                 <router-link :to="`/article/${question._id}`" class="btn btn-primary">Read </router-link>
                 <router-link :to="`/edit/${question._id}`" class="btn btn-success ml-2">Edit </router-link>
                 <button @click="deleteQuestion(question._id)" class="btn btn-danger ml-2">Delete </button>
@@ -50,14 +49,13 @@ export default {
         console.log(err)
       })
     },
-    deleteQuestion (id) {
-      console.log('siap delete ',id)
+    deleteQuestion (todelete) {
 
       let self = this
 
       axios({
         method:'DELETE',
-        url: `${config.port}/questions/${id}`,
+        url: `${config.port}/questions/${todelete}`,
         headers: {
           token: localStorage.getItem('token')
         }

@@ -117,7 +117,7 @@ class Controller {
 
     static delete(req, res) {
         
-        Question.findOneAndDelete(req.params.id)
+        Question.findByIdAndRemove(req.params.id)
             .then((deleted) => {
                 res.status(200).json({
                     message: 'Question deleted successfully'
