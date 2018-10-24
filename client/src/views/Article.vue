@@ -25,8 +25,10 @@
           <p class="lead" v-html="question.data.description"></p>
           <br>
           <div class="text-right">
-            <button class="btn btn-success" @click="upvoteQ(question.data._id)"><i class="fas fa-thumbs-up"></i> {{question.data.upvotes.length}}</button>
-            <button class ="btn btn-danger ml-2 mr-3" @click="downvoteQ(question.data._id)"><i class="fas fa-thumbs-down"></i> {{question.data.downvotes.length}}</button>
+            <button v-if="currentuser !== question.data.author._id" class="btn btn-success" @click="upvoteQ(question.data._id)"><i class="fas fa-thumbs-up"></i> {{question.data.upvotes.length}}</button>
+            <button v-if="currentuser !== question.data.author._id" class ="btn btn-danger ml-2 mr-3" @click="downvoteQ(question.data._id)"><i class="fas fa-thumbs-down"></i> {{question.data.downvotes.length}}</button>
+            <button v-if="currentuser === question.data.author._id" class="btn btn-success" ><i class="fas fa-thumbs-up"></i> {{question.data.upvotes.length}}</button>
+            <button v-if="currentuser === question.data.author._id" class ="btn btn-danger ml-2 mr-3"><i class="fas fa-thumbs-down"></i> {{question.data.downvotes.length}}</button>
           </div>
           <!-- <div v-html="article.data.content"></div> -->
           <hr>
@@ -52,8 +54,10 @@
               <br>
               <div class="text-right mt-5 ml-3">
                 <button class="btn-sm btn-danger" @click="deleteAnswer(answer._id)" v-if="currentuser === answer.author._id && islogin === true"><i class="fas fa-trash-alt"></i></button>
-                <button class="btn-sm btn-success ml-2" @click="upvoteA(answer._id)"><i class="fas fa-thumbs-up"></i> {{answer.upvotes.length}}</button>
-                <button class ="btn-sm btn-danger ml-2" @click="downvoteA(answer._id)"><i class="fas fa-thumbs-down"></i> {{answer.downvotes.length}}</button>
+                <button class="btn-sm btn-success ml-2" @click="upvoteA(answer._id)" v-if="currentuser !== answer.author._id && islogin === true"><i class="fas fa-thumbs-up"></i> {{answer.upvotes.length}}</button>
+                <button class ="btn-sm btn-danger ml-2" @click="downvoteA(answer._id)" v-if="currentuser !== answer.author._id && islogin === true"><i class="fas fa-thumbs-down"></i> {{answer.downvotes.length}}</button>
+                <button class="btn-sm btn-success ml-2" v-if="currentuser === answer.author._id && islogin === true"><i class="fas fa-thumbs-up"></i> {{answer.upvotes.length}}</button>
+                <button class ="btn-sm btn-danger ml-2" v-if="currentuser === answer.author._id && islogin === true"><i class="fas fa-thumbs-down"></i> {{answer.downvotes.length}}</button>
               </div>
             </div>
           </div>

@@ -75,26 +75,26 @@ class Controller {
             })
     }
 
-    // static search(req, res) {
-    //     Article.find({
-    //             title: new RegExp(req.query.keyword, 'i')
-    //         }, null, {
-    //             sort: {
-    //                 title: 'ASC'
-    //             }
-    //         })
-    //         .populate('author')
-    //         .then(data => {
-    //             res.status(200).json({
-    //                 data: data
-    //             })
-    //         })
-    //         .catch(err => {
-    //             res.status(500).json({
-    //                 message: err
-    //             })
-    //         })
-    // }
+    static search(req, res) {
+        Question.find({
+                title: new RegExp(req.query.keyword, 'i')
+            }, null, {
+                sort: {
+                    title: 'ASC'
+                }
+            })
+            .populate('author')
+            .then(data => {
+                res.status(200).json({
+                    data: data
+                })
+            })
+            .catch(err => {
+                res.status(500).json({
+                    message: err
+                })
+            })
+    }
 
     static my(req, res) {
         Question.find({
@@ -130,27 +130,25 @@ class Controller {
             })
     }
 
-    // static byCategory(req, res) {
-    //     Article.find({
-    //             category: req.params.id
-    //         })
-    //         .then((result) => {
-    //             res.status(201).json({
-    //                 data: result
-    //             })
-    //         })
-    //         .catch((err) => {
-    //             console.log(err)
-    //             res.status(500).json({
-    //                 message: 'get Question by category failed'
-    //             })
-    //         })
-    // }
+    static byCategory(req, res) {
+        Question.find({
+                category: req.params.id
+            })
+            .then((result) => {
+                res.status(201).json({
+                    data: result
+                })
+            })
+            .catch((err) => {
+                console.log(err)
+                res.status(500).json({
+                    message: 'get question by category failed'
+                })
+            })
+    }
 
 
     static update(req, res) {
-        console.log('sudah masuk ke controller update')
-
         if ((!req.body.title && !req.body.description) || (req.body.title.length === 0 && req.body.description.length === 0)) {
             res.status(500).json({
                 message: 'An Question need a content and title'
