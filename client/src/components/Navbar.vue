@@ -78,14 +78,21 @@
                 <div class="modal-body">
                     Name<br>
                     <input type="text" v-model="register_name"><br>
+                    <p v-if="register_name_failed === true">*name minimum length is 4</p>
                     Email<br>
                     <input type="email" v-model="register_email"><br>
+                    <p v-if="register_email_failed === true">*email is required</p>
                     Password<br>
                     <input type="password" v-model="register_password">
+                    <p v-if="register_password_failed === true">*password minimum length is 4</p>
+
+                    <div v-if="register_success === true">
+                      Register Success ! You can now login with your email and password..
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" @click="register()">Register</button>
+                    <button type="button" class="btn btn-primary" @click="register()">Register</button>
                 </div>
                 </div>
             </div>
@@ -110,7 +117,13 @@ export default {
 
       register_name: '',
       register_email: '',
-      register_password: ''
+      register_password: '',
+
+      register_name_failed : false,
+      register_email_failed : false,
+      register_password_failed : false,
+      
+      register_success : false
     }
   },
   mounted () {
@@ -129,6 +142,19 @@ export default {
       }
     },
     register () {
+      if(this.register_name.length < 4){
+        this.register_name_failed = true
+      }else 
+      
+      if(this.register_email.length < 4){
+        this.register_email_failed = true
+      }
+      
+      if(this.register_password < 4){
+        this.register_password_failed = true
+      }
+
+
       let self = this
 
       let data = {
@@ -142,13 +168,13 @@ export default {
         method: 'POST',
         data
       })
-        .then((response) => {
-          console.log(response)
-          console.log(response.data)
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      .then((response) => {
+        console.log(response.data)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    
     },
     signin () {
       let email = this.login_email

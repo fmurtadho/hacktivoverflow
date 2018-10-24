@@ -54,14 +54,15 @@ export default {
   },
   methods: {
     runSearch () {
+
       let self = this
       axios({
         method: 'GET',
         url: `${config.port}/questions/search?keyword=${self.input_search}`
       })
         .then((response) => {
-          
           self.$emit('search-result', response.data.data)
+          this.$router.push('/')
         })
         .catch((err) => {
           console.log(err)

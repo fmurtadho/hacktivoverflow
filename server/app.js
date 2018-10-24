@@ -4,8 +4,6 @@ const routes   = require('./routes')
 //ROUTES REQUIRE
 const userRoutes = require('./routes/users')
 const categoryRoutes = require('./routes/category')
-const articleRoutes = require('./routes/article')
-const commentRoutes = require('./routes/comment')
 
 //PET OVERFLOW
 const questionRoutes = require('./routes/question')
@@ -35,8 +33,6 @@ app.use(express.json())
 app.use('/', routes)
 app.use('/users',userRoutes)
 app.use('/categories',categoryRoutes)
-app.use('/articles',articleRoutes)
-app.use('/comments',commentRoutes)
 
 //PET OVERFLOW
 app.use('/questions',questionRoutes)

@@ -250,6 +250,8 @@ export default {
   created () {
     this.getArticle(this.$route.params.articleId)
     this.checkToken()
+    console.log('tessssssssssssssssssssssssssssssss')
+    console.log('state dari vuex',this.$store.state.dummy)
   },
   mounted () {
     this.checkToken()
