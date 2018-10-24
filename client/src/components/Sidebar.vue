@@ -57,11 +57,11 @@ export default {
       let self = this
       axios({
         method: 'GET',
-        url: `${config.port}/articles/search?keyword=${self.input_search}`
+        url: `${config.port}/questions/search?keyword=${self.input_search}`
       })
         .then((response) => {
+          
           self.$emit('search-result', response.data.data)
-          console.log(response.data.data)
         })
         .catch((err) => {
           console.log(err)
@@ -87,7 +87,7 @@ export default {
 
       axios({
         method: 'GET',
-        url: `${config.port}/articles/bycategory/${id}`
+        url: `${config.port}/questions/bycategory/${id}`
       })
         .then((response) => {
           console.log(response.data.data)
