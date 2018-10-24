@@ -54,27 +54,27 @@ class Controller {
             })
     }
 
-    // static readOne(req, res) {
-    //     Article.findById(req.params.id)
-    //         .populate('category')
-    //         .populate('author')
-    //         .populate({
-    //             path: "comments",
-    //             populate: {
-    //                 path: "user"
-    //             }
-    //         })
-    //         .then((result) => {
-    //             res.status(200).json({
-    //                 data: result
-    //             })
-    //         })
-    //         .catch((err) => {
-    //             res.status(500).json({
-    //                 message: 'cant find article'
-    //             })
-    //         })
-    // }
+    static readOne(req, res) {
+        Question.findById(req.params.id)
+            .populate('category')
+            .populate('author')
+            .populate({
+                path: "answers",
+                populate: {
+                    path: "author"
+                }
+            })
+            .then((result) => {
+                res.status(200).json({
+                    data: result
+                })
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message: 'cant find question'
+                })
+            })
+    }
 
     // static search(req, res) {
     //     Article.find({

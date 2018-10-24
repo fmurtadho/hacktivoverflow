@@ -1,13 +1,61 @@
 <template>
-  <div class="home">
-    <h3>Hello from home</h3>
-  </div>
+  <!-- Page Content -->
+    <div class="container">
+
+      <div class="row">
+
+        <!-- Blog Entries Column -->
+        <div class="col-md-8">
+
+          <h1 class="my-4">
+            <center><small>Question List</small></center>
+          </h1>
+
+          <!-- Blog Post -->
+          <all-article :searchresult="searchresult" :categoryresult="categoryresult"></all-article>
+
+          <!-- Pagination -->
+          <pagination></pagination>
+
+        </div>
+
+        <!-- Sidebar Widgets Column -->
+        <sidebar @search-result="searchResult" @category-result="categoryResult"></sidebar>
+
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.container -->
 </template>
 
 <script>
 // @ is an alias to /src
+import AllArticle from '@/components/AllArticle.vue'
+import Pagination from '@/components/Pagination.vue'
+import Sidebar from '@/components/Sidebar.vue'
 
 export default {
-  name: 'home'
+  name: 'home',
+  components: {
+    AllArticle,
+    Pagination,
+    Sidebar
+  },
+  data () {
+    return {
+      searchresult: '',
+      categoryresult: ''
+    }
+  },
+  methods: {
+    searchResult (val) {
+      // console.log('val in home from sidebar',val)
+      this.searchresult = val
+    },
+    categoryResult (val) {
+      this.categoryresult = val
+    }
+  }
 }
 </script>
