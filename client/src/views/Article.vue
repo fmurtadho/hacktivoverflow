@@ -22,7 +22,7 @@
           <hr>
 
           <!-- Post Content -->
-          <p class="lead">{{question.data.description}}</p>
+          <p class="lead" v-html="question.data.description"></p>
           <br>
           <div class="text-right">
             <button class="btn btn-success" @click="upvoteQ(question.data._id)"><i class="fas fa-thumbs-up"></i> {{question.data.upvotes.length}}</button>

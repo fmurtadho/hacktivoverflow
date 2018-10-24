@@ -13,6 +13,7 @@
             <select v-model="input_category" name="Category">
               <option value="5bcee9e7599d582188ce7951">Cat</option>
               <option value="5bd01521f5baa85a411a012d">Dog</option>
+              <option value="5bd01d612170ca6553a06c6e"
             </select>
           </div>
           <button class="btn btn-primary" v-on:click="submitUpdate()">Submit Update</button>
