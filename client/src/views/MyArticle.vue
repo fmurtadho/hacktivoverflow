@@ -8,7 +8,7 @@
                 <!-- <p class="card-text" v-html="article.content.slice(0, 150) + ' ...'"></p> -->
                 <router-link :to="`/article/${question._id}`" class="btn btn-primary">Read </router-link>
                 <router-link :to="`/edit/${question._id}`" class="btn btn-success ml-2">Edit </router-link>
-                <button @click="deleteArticle(question._id)" class="btn btn-danger ml-2">Delete </button>
+                <button @click="deleteQuestion(question._id)" class="btn btn-danger ml-2">Delete </button>
             </div>
             <div class="card-footer text-muted">
                 <div v-html="'Posted on ' + question.createdAt.slice(0, 10)"></div>
@@ -43,30 +43,32 @@ export default {
           token: localStorage.getItem('token')
         }
       })
-        .then((response) => {
-          console.log(response.data.data)
-          self.myquestion = response.data.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      .then((response) => {
+        self.myquestion = response.data.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
     },
-    deleteArticle (id) {
+    deleteQuestion (id) {
+      console.log('siap delete ',id)
+
       let self = this
 
       axios({
-        method: 'DELETE',
-        url: `${config.port}/articles/${id}`,
+        method:'DELETE',
+        url: `${config.port}/questions/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
-        .then((response) => {
-          self.triggerChange = response.data
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      .then((response) => {
+        self.triggerChange = response.data
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
     },
     checkToken () {
       let token = localStorage.getItem('token')
@@ -86,7 +88,7 @@ export default {
   },
   watch: {
     triggerChange: function (val) {
-      this.getMyArticle()
+      this.getMyQuestion()
     },
     islogin: function (val) {
       this.checkToken()

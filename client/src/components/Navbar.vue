@@ -18,13 +18,13 @@
                 </li>
                 <div class="dropdown">
                 <a class="btn nav-link dropdown-toggle" href="#" v-if="islogin === true" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Blog
+                    User Menu
                 </a>
 
                 <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
                     <router-link :to="`/myprofile`" class="dropdown-item" href="">My Profile</router-link>
-                    <router-link :to="`/myarticle`" class="dropdown-item" href="">My Article</router-link>
-                    <router-link :to="`/create`" class="dropdown-item" href="">Post Article</router-link>
+                    <router-link :to="`/myarticle`" class="dropdown-item" href="">My Question</router-link>
+                    <router-link :to="`/create`" class="dropdown-item" href="">Post Question</router-link>
                 </div>
                 </div>
                 <li class="nav-item" v-if="islogin === false" data-toggle="modal" data-target="#exampleModalCenter">

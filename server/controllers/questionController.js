@@ -2,8 +2,7 @@ const Question = require('../models/questions')
 
 class Controller {
     static create(req, res) {
-        console.log('masuk ke question controller')
-
+        
         if ((!req.body.title && !req.body.description) || (req.body.title.length === 0 && req.body.description.length === 0)) {
             res.status(500).json({
                 message: 'question need description and title'
@@ -116,6 +115,21 @@ class Controller {
             })
     }
 
+    static delete(req, res) {
+        
+        Question.findOneAndDelete(req.params.id)
+            .then((deleted) => {
+                res.status(200).json({
+                    message: 'Question deleted successfully'
+                })
+            })
+            .catch((err) => {
+                res.status(500).json({
+                    message: 'Delete Question failed'
+                })
+            })
+    }
+
     // static byCategory(req, res) {
     //     Article.find({
     //             category: req.params.id
@@ -133,19 +147,6 @@ class Controller {
     //         })
     // }
 
-    // static delete(req, res) {
-    //     Article.findOneAndDelete(req.params.id)
-    //         .then((deleted) => {
-    //             res.status(200).json({
-    //                 message: 'Article deleted successfully'
-    //             })
-    //         })
-    //         .catch((err) => {
-    //             res.status(500).json({
-    //                 message: 'Delete Question failed'
-    //             })
-    //         })
-    // }
 
     static update(req, res) {
         console.log('sudah masuk ke controller update')
