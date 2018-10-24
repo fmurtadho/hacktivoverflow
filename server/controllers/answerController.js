@@ -55,7 +55,7 @@ class Controller {
     }
 
     static delete(req,res){
-        myComment.findByIdAndDelete(req.params.id)
+        Answer.findByIdAndDelete(req.params.id)
         .then(()=>{
             res.status(200).json({
                 message : 'delete success'

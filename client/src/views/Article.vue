@@ -49,7 +49,7 @@
               {{answer.description}}
               <br>
               <div class="mt-5">
-                <button class="btn-sm btn-danger" v-on:click="deleteComment(answer._id)" v-if="currentuser === answer.author._id && islogin === true"><i class="fas fa-trash-alt"></i></button>
+                <button class="btn-sm btn-danger" @click="deleteAnswer(answer._id)" v-if="currentuser === answer.author._id && islogin === true"><i class="fas fa-trash-alt"></i></button>
                 <button class="btn-sm btn-success ml-2" @click="upvoteA(answer._id)"><i class="fas fa-thumbs-up"></i> {{answer.upvotes.length}}</button>
                 <button class ="btn-sm btn-danger ml-2" @click="downvoteA(answer._id)"><i class="fas fa-thumbs-down"></i> {{answer.downvotes.length}}</button>
               </div>
@@ -135,23 +135,26 @@ export default {
           console.log(err)
         })
     },
-    deleteComment (id) {
+    deleteAnswer (id) {
       let self = this
+
+      console.log('siap delete',id)
 
       axios({
         method: 'DELETE',
-        url: `${config.port}/comments/${id}`,
+        url: `${config.port}/answers/${id}`,
         headers: {
           token: localStorage.getItem('token')
         }
       })
-        .then((response) => {
-          // console.log(response.data)
-          self.triggerevent = response
-        })
-        .catch((err) => {
-          console.log(err)
-        })
+      .then((response) => {
+        console.log(response.data)
+        self.triggerevent = response
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+
     },
     checkToken () {
       let token = localStorage.getItem('token')
