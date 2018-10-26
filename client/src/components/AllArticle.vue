@@ -14,7 +14,7 @@
                 by
                 <!-- <router-link :to="`/author/${question.author._id}`" >{{question.author.name}}</router-link> -->
                 <router-link :to="`/authorprofile/${question.author._id}`" >{{question.author.name}}</router-link>
-                <div class="text-right"><i class="far fa-comments"></i> {{question.answers.length}}</div>
+                <div class="text-right"><i class="far fa-thumbs-up"></i> {{question.upvotes.length}} <i class="far fa-thumbs-down ml-2"></i> {{question.downvotes.length}} <i class="far fa-comments ml-2"></i> {{question.answers.length}}</div>
             </div>
         </div>
     </div>

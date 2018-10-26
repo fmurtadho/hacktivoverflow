@@ -40,11 +40,6 @@ app.use('/questions',questionRoutes)
 app.use('/answers',answerRoutes)
 app.use('/actions',actionRoutes)
 
-// app.listen(process.env.port, function(){
-//     crontest()
-//     console.log('Listening on port', process.env.port)
-// })
-
 app.listen(process.env.port,()=>sendEmail())
 
 
