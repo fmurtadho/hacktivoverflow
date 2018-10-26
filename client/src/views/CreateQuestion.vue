@@ -19,9 +19,9 @@
                 Category :
                 <br>
                 <select v-model="input_category" name="Category">
-                  <option value="5bd05d56a60af222d9c11ab1">Cat</option>
-                  <option value="5bd05d69a60af222d9c11ab2">Dog</option>
-                  <option value="5bd05d16a60af222d9c11ab0">Other</option>
+                  <option v-for="(category, index) in all_categories" :key="index" :value="category._id" > 
+                    {{category.name}} 
+                  </option>
                 </select>
             </div>
             <button class="btn btn-primary" @click="submitQuestion()">Submit</button>
@@ -46,6 +46,11 @@ export default {
       uploading: false,
       success: false,
       failed: false
+    }
+  },
+  computed : {
+      all_categories(){
+        return this.$store.state.allCategories
     }
   },
   methods: {

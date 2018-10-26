@@ -1,5 +1,6 @@
 const express  = require('express')
 const routes   = require('./routes')
+const sendEmail = require('./helpers/cron').sendemail
 
 //ROUTES REQUIRE
 const userRoutes = require('./routes/users')
@@ -39,8 +40,13 @@ app.use('/questions',questionRoutes)
 app.use('/answers',answerRoutes)
 app.use('/actions',actionRoutes)
 
-app.listen(process.env.port, function(){
-    console.log('Listening on port', process.env.port)
-})
+// app.listen(process.env.port, function(){
+//     crontest()
+//     console.log('Listening on port', process.env.port)
+// })
+
+app.listen(process.env.port,()=>sendEmail())
+
+
 
 module.exports = app;
