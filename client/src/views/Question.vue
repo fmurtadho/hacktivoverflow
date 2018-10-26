@@ -22,6 +22,7 @@
           <hr>
 
           <!-- Post Content -->
+
           <p class="lead" v-html="question.data.description"></p>
           <br>
           <div class="text-right">

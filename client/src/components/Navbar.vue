@@ -194,7 +194,7 @@ export default {
         url: `${config.port}/users/signin`,
         data
       })
-        .then(function (response) {
+        .then((response) => {
           self.login_failed = false
 
           self.login_email = ''
@@ -212,11 +212,13 @@ export default {
           }
           self.islogin = true
 
+          this.$store.commit('mutStoreIsLogin',true)
+          console.log('is login di dalam store',this.$store.state.storeislogin)
           self.$emit('islogin-data', self.islogin)
           self.$emit('isadmin-data', self.isadmin)
           // console.log(this.isadmin)
         })
-        .catch(function (err) {
+        .catch((err) => {
           self.login_failed = true
           console.log(err)
         })
@@ -231,6 +233,8 @@ export default {
       this.$emit('trigger-change', this.triggerchange)
       this.$emit('islogin-data', this.islogin)
       this.$emit('isadmin-data', this.isadmin)
+
+      this.$store.commit('mutStoreIsLogin',false)
     }
   }
 }

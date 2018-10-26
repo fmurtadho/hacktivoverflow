@@ -11,9 +11,9 @@
             <wysiwyg v-model="input_description"/>
             <br>
             <select v-model="input_category" name="Category">
-              <option value="5bd05d56a60af222d9c11ab1">Cat</option>
-              <option value="5bd05d69a60af222d9c11ab2">Dog</option>
-              <option value="5bd05d16a60af222d9c11ab0">Other</option>
+              <option v-for="(category, index) in all_categories" :key="index" :value="category._id" > 
+                {{category.name}} 
+              </option>
             </select>
           </div>
           <button class="btn btn-primary" v-on:click="submitUpdate()">Submit Update</button>
@@ -33,6 +33,11 @@ export default {
       input_description: '',
 
       input_category: ''
+    }
+  },
+  computed : {
+      all_categories(){
+        return this.$store.state.allCategories
     }
   },
   methods: {
@@ -90,7 +95,7 @@ export default {
         self.input_title = ''
         self.input_description = ''
         self.input_category = ''
-        this.$router.push('/myarticle')
+        this.$router.push('/')
       })
     },
     addImage (link) {

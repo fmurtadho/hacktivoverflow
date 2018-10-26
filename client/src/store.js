@@ -7,7 +7,9 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     allQuestions : '',
-    allCategories : ''
+    allCategories : '',
+
+    storeislogin : ''
   },
   mutations: {
     mutAllQuestions(state,payload){
@@ -21,6 +23,9 @@ export default new Vuex.Store({
     },
     searchByCategory(state,payload){
       state.allQuestions.data = payload
+    },
+    mutStoreIsLogin(state,payload){
+      state.storeislogin = payload
     }
   },
   actions: {
